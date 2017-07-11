@@ -49,8 +49,6 @@ sub value-handler(Int $obs, ReadStat::Variable $variable, ReadStat::Value $value
 my $reader = ReadStat::Parser.new;
 ok $reader;
 
-$reader.set-file-character-encoding("ASCII");
-$reader.set-handler-character-encoding("UTF-8");
 $reader.set-row-limit(1);
 $reader.set-metadata-handler(&metadata-handler);
 $reader.set-note-handler(&note-handler);
