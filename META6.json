@@ -1,0 +1,15 @@
+{
+    "perl": "6.c",
+    "name": "ReadStat",
+    "version": "0.1.0",
+    "description": "Read and write SPSS and Stata data sets using the ReadStat C library",
+    "authors": ["Evan Miller"],
+    "license": "MIT",
+    "provides": {
+        "ReadStat" : "lib/ReadStat.pm"
+    },
+    "depends": [
+        "readstat:from<native>"
+    ],
+    "source-url": "git://github.com/evanmiller/ReadStat.pm6.git"
+}

@@ -1,0 +1,12 @@
+language: perl6
+
+perl6:
+    - '2017.04'
+
+install:
+    - git clone git@github.com:WizardMac/ReadStat.git
+    - cd ReadStat
+    - ./configure
+    - make
+    - sudo cp .libs/*.* /usr/lib
+    - cd ..
