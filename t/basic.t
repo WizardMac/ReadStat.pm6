@@ -57,6 +57,6 @@ $reader.set-note-handler(&note-handler);
 $reader.set-info-handler(&info-handler);
 $reader.set-variable-handler(&variable-handler);
 $reader.set-value-handler(&value-handler);
-is $reader.parse("/Users/emiller/Downloads/216data.sav", :sav), ReadStat::Error::no-error;
+is $reader.parse("resources/216data.sav", :sav), ReadStat::Error::no-error;
 
 done-testing;
