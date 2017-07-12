@@ -34,16 +34,16 @@ method set-label(Str $new-label) { readstat_variable_set_label(self, $new-label)
 method format() returns Str { readstat_variable_get_label(self) }
 method set-format(Str $new-format) { readstat_variable_set_format(self, $new-format) }
 
-method value-type() returns ValueType { readstat_variable_get_type(self) }
+method value-type() returns ReadStat::ValueType { readstat_variable_get_type(self) }
 method storage-width() returns UInt { readstat_variable_get_storage_width(self) }
 
 method display-width() returns UInt { readstat_variable_get_display_width(self) }
 method set-display-width(UInt $new-width) { readstat_variable_set_display_width(self, $new-width) }
 
-method measure() returns Measure { Measure(readstat_variable_get_measure(self)) }
-method set-measure(Measure $new-measure) { readstat_variable_set_measure(self, $new-measure) }
+method measure() returns ReadStat::Measure { ReadStat::Measure(readstat_variable_get_measure(self)) }
+method set-measure(ReadStat::Measure $new-measure) { readstat_variable_set_measure(self, $new-measure) }
 
-method alignment() returns Alignment { Alignment(readstat_variable_get_alignment(self)) }
-method set-alignment(Alignment $new-alignment) { readstat_variable_set_alignment(self, $new-alignment) }
+method alignment() returns ReadStat::Alignment { ReadStat::Alignment(readstat_variable_get_alignment(self)) }
+method set-alignment(ReadStat::Alignment $new-alignment) { readstat_variable_set_alignment(self, $new-alignment) }
 
 method set-label-set(ReadStat::LabelSet $label-set) { readstat_variable_set_label_set(self, $label-set) }

@@ -36,16 +36,16 @@ method tag() returns Int {
 
 method value() {
     given self.type {
-        when ReadStat::ValueType::string-type {
+        when ReadStat::ValueType::string {
             readstat_string_value($.val1, $.val2)
         }
-        when (ReadStat::ValueType::double-type
-            | ReadStat::ValueType::float-type) {
+        when (ReadStat::ValueType::double
+            | ReadStat::ValueType::float) {
             Num(readstat_double_value($.val1, $.val2))
         }
-        when (ReadStat::ValueType::int32-type
-            | ReadStat::ValueType::int16-type
-            | ReadStat::ValueType::int8-type) {
+        when (ReadStat::ValueType::int32
+            | ReadStat::ValueType::int16
+            | ReadStat::ValueType::int8) {
             Int(readstat_int32_value($.val1, $.val2))
         }
     }

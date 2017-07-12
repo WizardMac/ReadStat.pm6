@@ -53,13 +53,13 @@ method DESTROY() {
     readstat_writer_free(self)
 }
 
-method set-data-writer(&callback:(Buf --> Int)) returns Error {
+method set-data-writer(&callback:(Buf --> Int)) returns ReadStat::Error {
     my $cb = sub (CArray[uint8] $data, size_t $length, Pointer $ctx) returns ssize_t {
         my $blob = Buf.allocate($length);
         $blob[$_] = $data[$_] for ^$length;
         &callback($blob);
     };
-    Error(readstat_set_data_writer(self, $cb));
+    ReadStat::Error(readstat_set_data_writer(self, $cb));
 }
 
 method add-label-set(ReadStat::ValueType $value-type, Str $name) returns ReadStat::LabelSet {
@@ -86,66 +86,66 @@ method get-string-ref(Int $index) returns ReadStat::StringRef {
     readstat_get_string_ref(self, $index);
 }
 
-method set-file-label(Str $file-label) returns Error {
-    Error(readstat_writer_set_file_label(self, $file-label));
+method set-file-label(Str $file-label) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_file_label(self, $file-label));
 }
 
-method set-file-timestamp(Dateish:D $date) returns Error {
-    Error(readstat_writer_set_file_timestamp(self, $date.posix))
+method set-file-timestamp(Dateish:D $date) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_file_timestamp(self, $date.posix))
 }
 
-method set-fweight-variable(ReadStat::Variable $variable) returns Error {
-    Error(readstat_writer_set_fweight_variable(self, $variable))
+method set-fweight-variable(ReadStat::Variable $variable) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_fweight_variable(self, $variable))
 }
 
-method set-file-format-version(UInt $version) returns Error {
-    Error(readstat_writer_set_file_format_version(self, $version))
+method set-file-format-version(UInt $version) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_file_format_version(self, $version))
 }
 
-method set-file-format-is64bit(Bool $is64bit) returns Error {
-    Error(readstat_writer_set_file_format_is_64bit(self, $is64bit))
+method set-file-format-is64bit(Bool $is64bit) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_file_format_is_64bit(self, $is64bit))
 }
 
-method set-compression(Compress $compression) returns Error {
-    Error(readstat_writer_set_compression(self, $compression))
+method set-compression(ReadStat::Compress $compression) returns ReadStat::Error {
+    ReadStat::Error(readstat_writer_set_compression(self, $compression))
 }
 
-multi method begin-writing(UInt $rows, :$sav) returns Error {
-    Error(readstat_begin_writing_sav(self, Pointer, $rows))
+multi method begin-writing(UInt $rows, :$sav) returns ReadStat::Error {
+    ReadStat::Error(readstat_begin_writing_sav(self, Pointer, $rows))
 }
 
-multi method begin-writing(UInt $rows, :$por) returns Error {
-    Error(readstat_begin_writing_por(self, Pointer, $rows))
+multi method begin-writing(UInt $rows, :$por) returns ReadStat::Error {
+    ReadStat::Error(readstat_begin_writing_por(self, Pointer, $rows))
 }
 
-multi method begin-writing(UInt $rows, :$dta) returns Error {
-    Error(readstat_begin_writing_dta(self, Pointer, $rows))
+multi method begin-writing(UInt $rows, :$dta) returns ReadStat::Error {
+    ReadStat::Error(readstat_begin_writing_dta(self, Pointer, $rows))
 }
 
-method begin-row() returns Error {
-    Error(readstat_begin_row(self));
+method begin-row() returns ReadStat::Error {
+    ReadStat::Error(readstat_begin_row(self));
 }
 
-multi method insert-value(ReadStat::Variable $var, Int:D $value) returns Error {
-    Error(readstat_insert_int32_value(self, $var, $value))
+multi method insert-value(ReadStat::Variable $var, Int:D $value) returns ReadStat::Error {
+    ReadStat::Error(readstat_insert_int32_value(self, $var, $value))
 }
 
-multi method insert-value(ReadStat::Variable $var, Numeric $value) returns Error {
-    Error(readstat_insert_double_value(self, $var, $value.Num))
+multi method insert-value(ReadStat::Variable $var, Numeric $value) returns ReadStat::Error {
+    ReadStat::Error(readstat_insert_double_value(self, $var, $value.Num))
 }
 
-multi method insert-value(ReadStat::Variable $var, Str $value) returns Error {
-    Error(readstat_insert_string_value(self, $var, $value))
+multi method insert-value(ReadStat::Variable $var, Str $value) returns ReadStat::Error {
+    ReadStat::Error(readstat_insert_string_value(self, $var, $value))
 }
 
-method insert-string-ref(ReadStat::Variable $var, ReadStat::StringRef $ref) returns Error {
-    Error(readstat_insert_string_ref(self, $var, $ref))
+method insert-string-ref(ReadStat::Variable $var, ReadStat::StringRef $ref) returns ReadStat::Error {
+    ReadStat::Error(readstat_insert_string_ref(self, $var, $ref))
 }
 
-method end-row() returns Error {
-    Error(readstat_end_row(self))
+method end-row() returns ReadStat::Error {
+    ReadStat::Error(readstat_end_row(self))
 }
 
-method end-writing() returns Error {
-    Error(readstat_end_writing(self))
+method end-writing() returns ReadStat::Error {
+    ReadStat::Error(readstat_end_writing(self))
 }

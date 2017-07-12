@@ -34,16 +34,16 @@ method new() {
     readstat_parser_init()
 }
 
-method set-file-character-encoding(Str:D $encoding) returns Error {
-    Error(readstat_set_file_character_encoding(self, $encoding))
+method set-file-character-encoding(Str:D $encoding) returns ReadStat::Error {
+    ReadStat::Error(readstat_set_file_character_encoding(self, $encoding))
 }
 
-method set-handler-character-encoding(Str:D $encoding) returns Error {
-    Error(readstat_set_handler_character_encoding(self, $encoding))
+method set-handler-character-encoding(Str:D $encoding) returns ReadStat::Error {
+    ReadStat::Error(readstat_set_handler_character_encoding(self, $encoding))
 }
 
-method set-row-limit(UInt:D $row-limit) returns Error {
-    Error(readstat_set_row_limit(self, $row-limit))
+method set-row-limit(UInt:D $row-limit) returns ReadStat::Error {
+    ReadStat::Error(readstat_set_row_limit(self, $row-limit))
 }
 
 method set-metadata-handler(&callback:(Str $file-name, Str $orig-encoding, DateTime $date-time, Int $file-format --> Bool)) {
@@ -97,16 +97,16 @@ method set-note-handler(&callback:(Int, Str --> Bool)) {
     readstat_set_note_handler(self, $cb);
 }
 
-multi method parse(Str:D $file, :$sav) returns Error {
-    Error(readstat_parse_sav(self, $file, Pointer))
+multi method parse(Str:D $file, :$sav) returns ReadStat::Error {
+    ReadStat::Error(readstat_parse_sav(self, $file, Pointer))
 }
 
-multi method parse(Str:D $file, :$por) returns Error {
-    Error(readstat_parse_por(self, $file, Pointer))
+multi method parse(Str:D $file, :$por) returns ReadStat::Error {
+    ReadStat::Error(readstat_parse_por(self, $file, Pointer))
 }
 
-multi method parse(Str:D $file, :$dta) returns Error {
-    Error(readstat_parse_dta(self, $file, Pointer))
+multi method parse(Str:D $file, :$dta) returns ReadStat::Error {
+    ReadStat::Error(readstat_parse_dta(self, $file, Pointer))
 }
 
 method DESTROY() {
